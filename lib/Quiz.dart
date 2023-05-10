@@ -1,4 +1,6 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
+import 'package:quiz_practice/questions_screen.dart';
 import 'package:quiz_practice/start_screen.dart';
 
 
@@ -12,9 +14,24 @@ State<Quiz> createState(){
 }
 class _QuizState extends State<Quiz>{
 
+  Widget ? activeWidget;
+
+  @override
+  void initState() {
+    activeWidget = StartScreen(switchScreen);
+    // TODO: implement initState
+    super.initState();
+  }
+
+  void switchScreen(){
+    setState(() {
+      activeWidget = const Questions();
+    });
+  }
+
+
   @override
   Widget build(context) {
-    // TODO: implement build
     return MaterialApp(
       home: Scaffold(
         body: Container(
@@ -27,7 +44,7 @@ class _QuizState extends State<Quiz>{
             end: Alignment.bottomRight
             ),
           ),
-          child: const StartScreen(),
+          child: activeWidget,
         ),
       ),
     );
